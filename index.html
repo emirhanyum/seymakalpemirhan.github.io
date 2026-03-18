@@ -2,81 +2,62 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>❤️</title>
+<title>Love Heart</title>
 
 <style>
-body{
-  margin:0;
-  background:#111;
-  overflow:hidden;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  font-family:sans-serif;
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
 }
 
-#heartContainer{
-  position:relative;
-  width:300px;
-  height:300px;
+/* Kalp container */
+.heart {
+  position: relative;
+  width: 300px;
+  height: 300px;
 }
 
-.love{
-  position:absolute;
-  color:#ff4d6d;
-  font-size:14px;
-  white-space:nowrap;
-  animation:rotate 10s linear infinite;
+/* Yazılar */
+.love {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 0 0;
+  color: #ff9bdc;
+  font-size: 14px;
+  white-space: nowrap;
+  animation: rotate 8s linear infinite;
 }
 
-@keyframes rotate{
-  from{ transform:rotate(0deg); }
-  to{ transform:rotate(360deg); }
-}
-
-.centerText{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  color:white;
-  font-size:20px;
+/* Animasyon */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg) translateX(120px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(120px) rotate(-360deg);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div id="heartContainer">
-  <div class="centerText">❤️</div>
+<div class="heart">
+  <!-- Aynı yazıyı çoğaltıyoruz -->
+  <div class="love" style="animation-delay:0s">I love you</div>
+  <div class="love" style="animation-delay:0.5s">I love you</div>
+  <div class="love" style="animation-delay:1s">I love you</div>
+  <div class="love" style="animation-delay:1.5s">I love you</div>
+  <div class="love" style="animation-delay:2s">I love you</div>
+  <div class="love" style="animation-delay:2.5s">I love you</div>
+  <div class="love" style="animation-delay:3s">I love you</div>
+  <div class="love" style="animation-delay:3.5s">I love you</div>
 </div>
-
-<script>
-const container = document.getElementById("heartContainer");
-
-function heartPosition(t){
-  return {
-    x: 16 * Math.pow(Math.sin(t),3),
-    y: 13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t)
-  };
-}
-
-for(let i=0;i<200;i++){
-  let t = Math.PI*2*(i/200);
-  let pos = heartPosition(t);
-
-  let el = document.createElement("div");
-  el.className = "love";
-  el.innerText = "I LOVE YOU";
-
-  el.style.left = (150 + pos.x*6) + "px";
-  el.style.top = (150 - pos.y*6) + "px";
-
-  container.appendChild(el);
-}
-</script>
 
 </body>
 </html>
