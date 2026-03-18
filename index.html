@@ -2,59 +2,79 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Kalpler</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>❤️</title>
+
 <style>
-body {
-  margin: 0;
-  background: black;
-  overflow: hidden;
-  font-family: sans-serif;
+body{
+  margin:0;
+  background:#111;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:sans-serif;
 }
 
-/* Kalp yazıları */
-.love_word {
-  position: absolute;
-  color: #ea80b0;
-  font-size: 1.4rem;
-  transform: translateY(-100%) rotateZ(-30deg);
-  text-shadow: 0 0 10px #fff;
-  letter-spacing: 2px;
-  white-space: nowrap;
+#heartContainer{
+  position:relative;
+  width:300px;
+  height:300px;
 }
 
-/* Yatay animasyon */
-.love_horizontal {
-  animation: horizontal 10s infinite alternate ease-in-out;
+.love{
+  position:absolute;
+  color:#ff4d6d;
+  font-size:14px;
+  white-space:nowrap;
+  animation:rotate 10s linear infinite;
 }
 
-@keyframes horizontal {
-  0% { transform: translateX(0) rotateZ(-30deg); }
-  100% { transform: translateX(200px) rotateZ(-30deg); }
+@keyframes rotate{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+.centerText{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  color:white;
+  font-size:20px;
 }
 </style>
 </head>
+
 <body>
 
-<div id="ui"></div>
+<div id="heartContainer">
+  <div class="centerText">❤️</div>
+</div>
 
 <script>
-// Kalp yazıları için örnek
-const ui = document.getElementById("ui");
+const container = document.getElementById("heartContainer");
 
-// 10 tane kalp yazısı oluştur
-for(let i=0;i<10;i++){
-  const el = document.createElement("div");
-  el.className = "love_word love_horizontal";
-  el.innerText = "I love you";
+function heartPosition(t){
+  return {
+    x: 16 * Math.pow(Math.sin(t),3),
+    y: 13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t)
+  };
+}
 
-  // Başlangıç pozisyonu rastgele
-  el.style.top = Math.random() * window.innerHeight + "px";
-  el.style.left = Math.random() * window.innerWidth + "px";
+for(let i=0;i<200;i++){
+  let t = Math.PI*2*(i/200);
+  let pos = heartPosition(t);
 
-  // Farklı animasyon gecikmesi
-  el.style.animationDelay = (i * 0.3) + "s";
+  let el = document.createElement("div");
+  el.className = "love";
+  el.innerText = "I LOVE YOU";
 
-  ui.appendChild(el);
+  el.style.left = (150 + pos.x*6) + "px";
+  el.style.top = (150 - pos.y*6) + "px";
+
+  container.appendChild(el);
 }
 </script>
 
